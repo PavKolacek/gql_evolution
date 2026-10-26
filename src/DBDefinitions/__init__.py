@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import create_async_engine
 
 from .BaseModel import BaseDBModel, IDType, UUIDColumn, UUIDFKey
 from .Domain_Events import EventModel, EventInvitationModel, EventTypeModel
+from .Domain_Tags import TagTypeModel, TagModel, TagEntityModel
 
 
 async def startEngine(connectionstring, makeDrop=False, makeUp=True):
@@ -58,7 +59,7 @@ def ComposeConnectionString():
     user = os.environ.get("POSTGRES_USER", "postgres")
     password = os.environ.get("POSTGRES_PASSWORD", "example")
     database = os.environ.get("POSTGRES_DB", "data")
-    hostWithPort = os.environ.get("POSTGRES_HOST", "localhost:5432")
+    hostWithPort = os.environ.get("POSTGRES_HOST", "postgres_gql:5432")
 
     driver = "postgresql+asyncpg"  # "postgresql+psycopg2"
     connectionstring = f"{driver}://{user}:{password}@{hostWithPort}/{database}"
@@ -71,6 +72,6 @@ def ComposeConnectionString():
 __all__ = [
     'BaseDBModel', 'IDType', 'UUIDColumn', 'UUIDFKey',
     'EventModel', 'EventInvitationModel', 'EventTypeModel',
-    'startEngine', 'ComposeConnectionString', 'EventTypeModel'
+    'TagTypeModel', 'TagModel', 'TagEntityModel',
+    'startEngine', 'ComposeConnectionString'
 ]
-
