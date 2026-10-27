@@ -187,5 +187,39 @@
             "tag_id": "34c16875-e341-497e-8e12-998f63277f51",
             "owner_id": "033f3930-9f7e-49a0-8b65-872974a67512"
         }
+    ],
+
+    "annotationtypes": [
+        {
+            "id": "7ab28a11-4f8d-48a0-bba4-9734f84af912",
+            "name": "Cvičná poznámka k první testovací anotaci",
+            "name_en": "Sample note"
+        },
+        {
+            "id": "f0e1c3a5-4b6d-4e2a-8f9b-1c2d3e4f5a6b",
+            "name": "Cvičná poznámka k druhé testovací anotaci",
+            "name_en": "Another annotation type"
+        }
+    ],
+    
+    "annotations": [
+        {
+            "id": "695c85d6-efbf-5984-bf02-a9c3ba6e64a1",
+            "entity_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+            "entity_type_id": "ce9e1f8c-1331-50b9-926c-fb8ea9df53c5",
+            "annotation_type_id": "7ab28a11-4f8d-48a0-bba4-9734f84af912",
+            "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+            "title": "Testovací anotace",
+            "content": "Toto je první anotace přiřazená k uživateli."
+        },
+        {
+            "id": "2151ca13-fdf1-42c9-93be-bfe1c9962ff0",
+            "entity_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+            "entity_type_id": "ce9e1f8c-1331-50b9-926c-fb8ea9df53c5",
+            "annotation_type_id": "f0e1c3a5-4b6d-4e2a-8f9b-1c2d3e4f5a6b",
+            "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+            "title": "Druhá testovací anotace",
+            "content": "Toto je druhá anotace přiřazená ke stejnému uživateli."
+        }
     ]
 }

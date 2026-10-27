@@ -1,3 +1,6 @@
+#python -m src.DBDefinitions.main Annotation seed '{}' --no-makeup
+#python -m src.DBDefinitions.main Annotation List '{}' --no-makeup  
+
 from __future__ import annotations
 
 import os
@@ -47,7 +50,20 @@ async def init_database_data(session: AsyncSession, get_demodata=get_demodata) -
     """
 
     json_data = get_demodata()
+    for annotation_type in json_data.get("annotationtypes", []):
+        if annotation_type.get("id") is not None:
+            annotation_type["id"] = uuid.UUID(str(annotation_type["id"]))
 
+    for annotation in json_data.get("annotations", []):
+        for field in (
+            "id",
+            "entity_id",
+            "entity_type_id",
+            "annotation_type_id",
+            "owner_id",
+        ):
+            if annotation.get(field) is not None:
+                annotation[field] = uuid.UUID(str(annotation[field]))
     Models = [
         mapper.class_
         for mapper in BaseDBModel.registry.mappers
@@ -82,26 +98,11 @@ async def init_database_data(session: AsyncSession, get_demodata=get_demodata) -
     modelIndex = dict((DBModel.__tablename__, DBModel) for DBModel in ModelsToImport)
     print(f"Models to import: {ModelsToImport}\nTable names: {table_names}\nModel index: {modelIndex}", flush=True)
 
-    from sqlalchemy.ext.asyncio import async_sessionmaker
-    session_factory_inner = async_sessionmaker(session.bind, expire_on_commit=False, class_=AsyncSession)
     @asynccontextmanager
     async def session_maker():
-        async with session_factory_inner() as s:
-            yield s
+        async with AsyncSession(bind=session.bind) as new_session:
+            yield new_session
 
     await ImportModels(session_maker, ModelsToImport, json_data)
 
     print("Data initialized", flush=True)
-
-
-if __name__ == "__main__":
-    import asyncio
-    from src.DBDefinitions import startEngine, ComposeConnectionString
-
-    async def _main():
-        conn_str = ComposeConnectionString()
-        session_maker = await startEngine(conn_str, makeUp=True)
-        async with session_maker() as session:
-            await init_database_data(session)
-
-    asyncio.run(_main())

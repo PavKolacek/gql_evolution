@@ -33,6 +33,7 @@ import sqlalchemy
 from sqlalchemy import inspect, select
 from sqlalchemy.orm import selectinload
 from sqlalchemy.orm.properties import ColumnProperty, RelationshipProperty
+from src.DBDefinitions.seed import init_database_data
 
 try:
     from dotenv import load_dotenv
@@ -638,7 +639,10 @@ async def run_async(args: argparse.Namespace) -> typing.Any:
 
     async with session_maker() as session:
         operation = args.operation.lower()
-
+        if operation == "seed":
+            await init_database_data(session)
+            return {"ok": True, "message": "Seedování dokončeno"}
+        
         if operation in {"create", "c"}:
             return await op_create(session, model_cls, payload)
 
