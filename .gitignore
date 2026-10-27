@@ -15,6 +15,7 @@
 *.pyc
 **/.pytest_cache
 **/.venv
+**/venv
 
 **/*.zip
 
