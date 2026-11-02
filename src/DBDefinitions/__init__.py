@@ -7,6 +7,7 @@ from .BaseModel import BaseDBModel, IDType, UUIDColumn, UUIDFKey
 from .Domain_Annotation import AnnotationModel, AnnotationTypeModel
 from .Domain_Events import EventModel, EventInvitationModel, EventTypeModel
 from .Domain_Tags import TagTypeModel, TagModel, TagEntityModel
+from .Domain_Collections import CollectionModel, CollectionItemModel, EntityTypeModel
 
 
 async def startEngine(connectionstring, makeDrop=False, makeUp=True):
@@ -74,5 +75,6 @@ __all__ = [
     'BaseDBModel', 'IDType', 'UUIDColumn', 'UUIDFKey',
     'EventModel', 'EventInvitationModel', 'EventTypeModel',
     'TagTypeModel', 'TagModel', 'TagEntityModel',
+    'CollectionModel', 'CollectionItemModel', 'EntityTypeModel',
     'startEngine', 'ComposeConnectionString'
 ]
