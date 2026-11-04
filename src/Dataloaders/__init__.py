@@ -11,6 +11,9 @@ from src.DBDefinitions import (
     EventInvitationModel,
     AnnotationModel,
     AnnotationTypeModel,
+    TagTypeModel,
+    TagModel,
+    TagEntityModel,
 )
 
 class LoaderMap(LoaderMapBase[BaseDBModel]):
@@ -20,6 +23,9 @@ class LoaderMap(LoaderMapBase[BaseDBModel]):
     EventInvitationModel: IDLoader[src.DBDefinitions.EventInvitationModel] = None
     AnnotationModel: IDLoader[src.DBDefinitions.AnnotationModel] = None
     AnnotationTypeModel: IDLoader[src.DBDefinitions.AnnotationTypeModel] = None
+    TagTypeModel: IDLoader[src.DBDefinitions.TagTypeModel] = None
+    TagModel: IDLoader[src.DBDefinitions.TagModel] = None
+    TagEntityModel: IDLoader[src.DBDefinitions.TagEntityModel] = None
 
     def __init__(self, session):
         super().__init__(session)
@@ -28,6 +34,9 @@ class LoaderMap(LoaderMapBase[BaseDBModel]):
         
         self.AnnotationModel = self.get(AnnotationModel)
         self.AnnotationTypeModel = self.get(AnnotationTypeModel)
+        self.TagTypeModel = self.get(TagTypeModel)
+        self.TagModel = self.get(TagModel)
+        self.TagEntityModel = self.get(TagEntityModel)
     
     def get_by_name(self, name: str):
         return getattr(self, name)
