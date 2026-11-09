@@ -31,7 +31,7 @@ class CollectionItemModel(BaseDBModel):
         back_populates="items",
         init=False,
     )
-    user_id: Mapped[Optional[IDType]] = UUIDFKey(ForeignKey("users.id"), default=None, nullable=True, comment="User assigned to the invitation")
+    owner_id: Mapped[Optional[IDType]] = UUIDFKey(ForeignKey("users.id"), default=None, nullable=True, comment="Owner of the item")
     entity_id: Mapped[IDType] = mapped_column(default=None, nullable=True)
     entity_type_id: Mapped[Optional[IDType]] = mapped_column(ForeignKey("entity_types.id"), index=True, nullable=True, default=None,)
     entity_type: Mapped[Optional["EntityTypeModel"]] = relationship(

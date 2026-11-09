@@ -221,5 +221,190 @@
             "title": "Druhá testovací anotace",
             "content": "Toto je druhá anotace přiřazená ke stejnému uživateli."
         }
-    ]
+    ],
+  "entity_types": [
+    {
+      "id": "3f1c2a5e-8b7d-4e1a-9c3f-2a6b5d4e7f10",
+      "name": "Entita",
+      "name_en": "Entity"
+    },
+    {
+      "id": "5a9d7c31-2e84-4b6f-a1d0-9f3c8e2b6a47",
+      "name": "Projekt",
+      "name_en": "Project",
+      "parent_id": "3f1c2a5e-8b7d-4e1a-9c3f-2a6b5d4e7f10"
+    },
+    {
+      "id": "8c4e1b92-7a35-4d08-b6f1-3e9a2c5d7b84",
+      "name": "Grantová výzva",
+      "name_en": "Grant call",
+      "parent_id": "3f1c2a5e-8b7d-4e1a-9c3f-2a6b5d4e7f10"
+    },
+    {
+      "id": "1d7f3a68-c452-4e9b-8a0d-6b2e9f4c1a53",
+      "name": "Dokument",
+      "name_en": "Document",
+      "parent_id": "3f1c2a5e-8b7d-4e1a-9c3f-2a6b5d4e7f10"
+    },
+    {
+      "id": "b2e86f04-93ad-47c1-a5e7-0d1c4f8a3b96",
+      "name": "Událost",
+      "name_en": "Event",
+      "parent_id": "3f1c2a5e-8b7d-4e1a-9c3f-2a6b5d4e7f10"
+    }
+  ],
+  "collections": [
+    {
+      "id": "4a1f9c27-6d3e-4a85-b7c2-0e8d5f1a9b34",
+      "name": "Oblíbené",
+      "description": "Moje oblíbené projekty, výzvy a dokumenty",
+      "color": "#F5B301",
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "d83b5e60-1c9a-4f72-a4e8-7b0c3d6f2a19",
+      "name": "Projekty k projednání",
+      "description": "Projekty, které je třeba projednat na poradě",
+      "color": "#3B82F6",
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "27c6a9f1-e5b3-4d08-9a14-c8f2b7e0d365",
+      "name": "Dokumenty k přečtení",
+      "description": "Dokumenty čekající na přečtení",
+      "color": "#10B981",
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "f0b4d831-a7c2-4e69-8153-d2a9e6c4b078",
+      "name": "Zajímavé grantové výzvy",
+      "description": "Výzvy vhodné pro podání žádosti",
+      "color": "#EF4444",
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    }
+  ],
+  "collection_items": [
+    {
+      "id": "6b6658cd-8338-4f53-83fe-010369de6fa6",
+      "collection_id": "4a1f9c27-6d3e-4a85-b7c2-0e8d5f1a9b34",
+      "entity_id": "a7e1c5d3-4b92-4f08-96a1-e3d70b5c8f21",
+      "entity_type_id": "5a9d7c31-2e84-4b6f-a1d0-9f3c8e2b6a47",
+      "position": 1,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "c19d4e72-0a6b-4835-b2f7-5e8a1d3c9b60",
+      "collection_id": "4a1f9c27-6d3e-4a85-b7c2-0e8d5f1a9b34",
+      "entity_id": "e5b30f86-d1a4-4c72-8e19-7a2c6f0d4b93",
+      "entity_type_id": "8c4e1b92-7a35-4d08-b6f1-3e9a2c5d7b84",
+      "position": 2,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "72f8a0b5-3c6e-4d19-a845-b1e9d7c20f36",
+      "collection_id": "4a1f9c27-6d3e-4a85-b7c2-0e8d5f1a9b34",
+      "entity_id": "0c94e7a2-b5d1-4638-9f0e-a3c8d52b1e77",
+      "entity_type_id": "1d7f3a68-c452-4e9b-8a0d-6b2e9f4c1a53",
+      "position": 3,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "e3a65b19-8f02-47d4-b9c3-2d0e7a1f5c88",
+      "collection_id": "d83b5e60-1c9a-4f72-a4e8-7b0c3d6f2a19",
+      "entity_id": "5f2d8b40-a9e6-4c13-b705-d4e1c8a39f62",
+      "entity_type_id": "5a9d7c31-2e84-4b6f-a1d0-9f3c8e2b6a47",
+      "position": 1,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "38d7c1e4-6a95-4b20-8f3d-c9b0a5e27d14",
+      "collection_id": "d83b5e60-1c9a-4f72-a4e8-7b0c3d6f2a19",
+      "entity_id": "9b1e4a76-c3d8-4e52-a0f9-6d7b2c8e1a45",
+      "entity_type_id": "5a9d7c31-2e84-4b6f-a1d0-9f3c8e2b6a47",
+      "position": 2,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "b50a2f93-d7e1-4c68-9a34-1e8c6b0d5f72",
+      "collection_id": "27c6a9f1-e5b3-4d08-9a14-c8f2b7e0d365",
+      "entity_id": "d4c8e1b7-2f59-4a03-b6d2-8a0e3f7c9b15",
+      "entity_type_id": "1d7f3a68-c452-4e9b-8a0d-6b2e9f4c1a53",
+      "position": 1,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "1f6e9d38-a2b7-4054-8c1e-f5d30a7b4e96",
+      "collection_id": "27c6a9f1-e5b3-4d08-9a14-c8f2b7e0d365",
+      "entity_id": "6a3b7f12-e8c4-4d95-a1b0-2c9e5d8f0a73",
+      "entity_type_id": "1d7f3a68-c452-4e9b-8a0d-6b2e9f4c1a53",
+      "position": 2,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "94c2b8e5-0d7a-4f31-b6e8-3a1d9c5f7b20",
+      "collection_id": "27c6a9f1-e5b3-4d08-9a14-c8f2b7e0d365",
+      "entity_id": "f8d1a4c6-5b39-4e70-8a2c-b7e0d3f94a18",
+      "entity_type_id": "1d7f3a68-c452-4e9b-8a0d-6b2e9f4c1a53",
+      "position": 3,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "ad07f5c3-b148-4e96-a2d5-7c3e0b9a1f84",
+      "collection_id": "f0b4d831-a7c2-4e69-8153-d2a9e6c4b078",
+      "entity_id": "2e9c5a18-f4b7-4d63-b0a9-c1d8e7f35a60",
+      "entity_type_id": "8c4e1b92-7a35-4d08-b6f1-3e9a2c5d7b84",
+      "position": 1,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    },
+    {
+      "id": "5d8b1e60-c3a9-4f27-9e14-0b6a8d2c7f53",
+      "collection_id": "f0b4d831-a7c2-4e69-8153-d2a9e6c4b078",
+      "entity_id": "c6a0f3d9-17e5-4b82-a4c1-9d2b8e5f0a37",
+      "entity_type_id": "8c4e1b92-7a35-4d08-b6f1-3e9a2c5d7b84",
+      "position": 2,
+      "createdby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "changedby_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "rbacobject_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
+      "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6"
+    }
+  ]
 }

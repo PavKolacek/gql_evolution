@@ -20,7 +20,7 @@ class CollectionService(BaseService[IDLoader[CollectionModel]]):
             raise ServiceExceptionWithCode(
                 "Collection not found", code=errors.COLLECTION_NOT_FOUND, location="EnsureOwner"
             )
-        if collection.user_id != get_user_id(ctx):
+        if collection.owner_id != get_user_id(ctx):
             raise ServiceExceptionWithCode(
                 "You are not owner of the collection",
                 code=errors.COLLECTION_NOT_OWNER,
@@ -31,7 +31,7 @@ class CollectionService(BaseService[IDLoader[CollectionModel]]):
     @classmethod
     async def CreateForUser(cls, ctx, entity):
         """Vlastníkem je vždy přihlášený uživatel, ne hodnota ze vstupu."""
-        entity.user_id = get_user_id(ctx)
+        entity.owner_id = get_user_id(ctx)
         return await cls.Create(ctx, entity)
 
     @classmethod
@@ -49,4 +49,4 @@ class CollectionService(BaseService[IDLoader[CollectionModel]]):
     @classmethod
     async def ReadMine(cls, ctx):
         loader = await cls.getLoader(ctx)
-        return await loader.filter_by(user_id=get_user_id(ctx))
+        return await loader.filter_by(owner_id=get_user_id(ctx))
