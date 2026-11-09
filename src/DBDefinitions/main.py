@@ -35,13 +35,13 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.orm.properties import ColumnProperty, RelationshipProperty
 from src.DBDefinitions.seed import init_database_data
 
-try:
-    from dotenv import load_dotenv
+from pathlib import Path
+from dotenv import load_dotenv
 
-    load_dotenv("environment.txt", override=False)
-    load_dotenv(".env", override=True)
-except ImportError:
-    pass
+# Resolve files relative to the repository, not the caller's working directory.
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(_PROJECT_ROOT / "environment.txt", override=False)
+load_dotenv(_PROJECT_ROOT / ".env", override=True)
 
 from uoishelpers.dataloaders import prepareSelect
 
@@ -640,7 +640,7 @@ async def run_async(args: argparse.Namespace) -> typing.Any:
     async with session_maker() as session:
         operation = args.operation.lower()
         if operation == "seed":
-            await init_database_data(session)
+            await init_database_data(session, force_demo=True)
             return {"ok": True, "message": "Seedování dokončeno"}
         
         if operation in {"create", "c"}:
