@@ -24,6 +24,9 @@ class LoaderProtocol(typing.Protocol):
 class LoaderMapProtocol(typing.Protocol):
     EventModel: LoaderProtocol
     EventInvitationModel: LoaderProtocol
+    CollectionModel: LoaderProtocol
+    CollectionItemModel: LoaderProtocol
+    EntityTypeModel: LoaderProtocol
 
 class ServiceContextProtocol(typing.Protocol):
     loaders: LoaderMapProtocol
