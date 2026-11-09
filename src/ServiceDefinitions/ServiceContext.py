@@ -5,6 +5,7 @@ from src.Dataloaders import LoaderMap
 
 if typing.TYPE_CHECKING:
     from src.ServiceDefinitions.Domain_Annotation.AnnotationService import AnnotationService as _AnnotationService
+    from src.ServiceDefinitions.Domain_Annotation.AnnotationTypeService import AnnotationTypeService as _AnnotationTypeService
     from src.ServiceDefinitions.Domain_Events.EventService import EventService as _EventService
     from src.ServiceDefinitions.Domain_Events.EventInvitationService import EventInvitationService as _EventInvitationService
 
@@ -15,6 +16,16 @@ class ServiceRegistry:
     def AnnotationService(self) -> type['_AnnotationService']:
         from src.ServiceDefinitions.Domain_Annotation.AnnotationService import AnnotationService
         return AnnotationService
+
+    @property
+    def AnnotationTypeService(self) -> type['_AnnotationTypeService']:
+        from src.ServiceDefinitions.Domain_Annotation.AnnotationTypeService import AnnotationTypeService
+        return AnnotationTypeService
+
+    @property
+    def EventService(self) -> type['_EventService']:
+        from src.ServiceDefinitions.Domain_Events.EventService import EventService
+        return EventService
 
 
     @property
