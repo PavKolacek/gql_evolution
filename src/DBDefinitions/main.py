@@ -39,7 +39,7 @@ try:
     from dotenv import load_dotenv
 
     load_dotenv("environment.txt", override=False)
-    load_dotenv(".env", override=False)
+    load_dotenv(".env", override=True)
 except ImportError:
     pass
 
