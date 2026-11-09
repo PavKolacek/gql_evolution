@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import uuid
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from sqlalchemy import inspect as sa_inspect
@@ -57,7 +58,9 @@ def is_sqlalchemy_model(cls: type) -> bool:
         return False
 
 
-get_demodata = lambda: readJsonFile(jsonFileName="./systemdata.json")
+get_demodata = lambda: readJsonFile(
+    jsonFileName=str(Path(__file__).resolve().parents[2] / "systemdata.json")
+)
 
 
 
@@ -141,6 +144,13 @@ async def init_database_data(session: AsyncSession, get_demodata=get_demodata, *
         ):
             if annotation.get(field) is not None:
                 annotation[field] = uuid.UUID(str(annotation[field]))
+
+    # ImportModels also inserts missing rows. Convert UUIDs before that first pass.
+    for table_name in ("collections", "collection_items"):
+        for row in json_data.get(table_name, []):
+            for key, value in list(row.items()):
+                if value is not None and (key == "id" or key.endswith("_id")):
+                    row[key] = uuid.UUID(str(value))
 
     Models = [
         mapper.class_
