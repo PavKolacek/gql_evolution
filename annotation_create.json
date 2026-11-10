@@ -1,8 +1,0 @@
-
-{
-  "entity_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
-  "entity_type_id": "ce9e1f8c-1331-50b9-926c-fb8ea9df53c5",
-  "owner_id": "51d101a0-81f1-44ca-8366-6cf51432e8d6",
-  "title": "CLI Create Test",
-  "content": "Test vytvoreni anotace pres AnnotationService."
-}
