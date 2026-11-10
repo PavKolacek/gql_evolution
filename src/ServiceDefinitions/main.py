@@ -477,7 +477,9 @@ async def op_get(
     payload: JsonDict,
 ) -> JsonDict:
     model_cls = await get_service_model(ctx, service_cls)
-    primary_key_value = get_primary_key_value(model_cls, payload)
+    primary_key_value = uuid.UUID(
+    str(get_primary_key_value(model_cls, payload))
+    )
     include = parse_include(payload)
 
     result = await service_cls.ReadById(
@@ -552,7 +554,28 @@ async def op_update(
 
     get_primary_key_value(model_cls, entity_payload)
 
-    entity = build_instance(model_cls, entity_payload)
+    
+    column_values, relationship_values = split_columns_and_relationships(
+        model_cls, entity_payload
+    )
+
+    if relationship_values:
+        raise CliError("Update relationships není podporován")
+
+    for key, value in column_values.items():
+        if not isinstance(value, str):
+            continue
+
+        column_type = inspect(model_cls).columns[key].type
+
+        if isinstance(column_type, sqlalchemy.Uuid):
+            column_values[key] = uuid.UUID(value)
+
+        elif isinstance(column_type, sqlalchemy.DateTime):
+            column_values[key] = datetime.datetime.fromisoformat(value)
+
+    entity = argparse.Namespace(**column_values)
+
 
     result = await service_cls.Update(
         ctx=ctx,
@@ -573,9 +596,21 @@ async def op_delete(
     if not isinstance(entity_payload, dict):
         raise CliError("'entity' must be an object")
 
-    get_primary_key_value(model_cls, entity_payload)
+    entity_id = uuid.UUID(
+        str(get_primary_key_value(model_cls, entity_payload))
+    )
 
-    entity = build_instance(model_cls, entity_payload)
+    entity = argparse.Namespace(id=entity_id)
+    existing = await service_cls.ReadById(
+        ctx=ctx,
+        id=entity_id,
+    )
+
+    if existing is None:
+        raise CliError(
+            f"Záznam s ID {entity_id} neexistuje."
+        )
+
 
     result = await service_cls.Delete(
         ctx=ctx,
@@ -693,7 +728,9 @@ async def run_async(args: argparse.Namespace) -> typing.Any:
         operation = args.operation.lower()
 
         if operation in {"create", "c"}:
-            return await op_create(ctx, service_cls, payload)
+            result = await op_create(ctx, service_cls, payload)
+            await session.commit()
+            return result
 
         if operation in {"get", "read", "r", "single"}:
             return await op_get(ctx, service_cls, payload)
@@ -702,10 +739,20 @@ async def run_async(args: argparse.Namespace) -> typing.Any:
             return await op_list(ctx, service_cls, payload)
 
         if operation in {"update", "u"}:
-            return await op_update(ctx, service_cls, payload)
+            result = await op_update(ctx, service_cls, payload)
+
+            if result is None:
+                raise CliError(
+                    "Update se neprovedl. Zkontroluj ID a lastchange."
+                )
+
+            await session.commit()
+            return result
 
         if operation in {"delete", "d", "remove"}:
-            return await op_delete(ctx, service_cls, payload)
+            result = await op_delete(ctx, service_cls, payload)
+            await session.commit()
+            return result
 
         return await op_call_service_method(
             ctx=ctx,

@@ -10,7 +10,7 @@ if typing.TYPE_CHECKING:
     from src.ServiceDefinitions.Domain_Collections.CollectionItemService import CollectionItemService as _CollectionItemService
     from src.ServiceDefinitions.Domain_Events.EventService import EventService as _EventService
     from src.ServiceDefinitions.Domain_Events.EventInvitationService import EventInvitationService as _EventInvitationService
-
+    from src.ServiceDefinitions.Domain_Annotation.AnnotationTypeService import AnnotationTypeService as _AnnotationTypeService
 
 @dataclasses.dataclass(frozen=True)
 class ServiceRegistry:
@@ -39,6 +39,12 @@ class ServiceRegistry:
     def CollectionItemService(self) -> type['_CollectionItemService']:
         from src.ServiceDefinitions.Domain_Collections.CollectionItemService import CollectionItemService
         return CollectionItemService
+    
+    @property
+    def AnnotationTypeService(self) -> type['_AnnotationTypeService']:
+        from src.ServiceDefinitions.Domain_Annotation.AnnotationTypeService import AnnotationTypeService
+        return AnnotationTypeService
+
 
 
 SERVICES = ServiceRegistry()
