@@ -81,3 +81,9 @@ GraphTypeDefinitions/
 ```bash
 python .CoderDefinitions/main.py
 ```
+
+## Spuštění main
+
+```bash
+uvicorn main:app --port 9999 --env-file environment.txt
+```

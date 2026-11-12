@@ -12,7 +12,9 @@ from src.GraphTypeDefinitions.schema import schema
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await Database().start(DatabaseSettings())
+    await Database().start(DatabaseSettings(
+        #make_drop=True
+    ))
     try:
         yield
     finally:
