@@ -940,12 +940,3 @@ Není určen pro definici GraphQL schématu.
 GraphQL typy a resolvery patří do `GraphTypeDefinitions`.
 
 Databázové modely patří do `DBDefinitions`.
-
-
-
-
-SPUSTENI VENV:
-./venv/Scripts/Activate.ps1
-
-SPUSTENI TESTU:
-pytest tests/services tests/db -q

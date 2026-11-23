@@ -33,7 +33,6 @@ class LoaderMap(LoaderMapBase[BaseDBModel]):
     CollectionItemModel: IDLoader[src.DBDefinitions.CollectionItemModel] = None
     EntityTypeModel: IDLoader[src.DBDefinitions.EntityTypeModel] = None
 
-
     def __init__(self, session):
         super().__init__(session)
         self.EventModel = self.get(EventModel)
