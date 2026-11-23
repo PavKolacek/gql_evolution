@@ -26,22 +26,17 @@ class CollectionItemModel(BaseDBModel):
     __tablename__ = "collection_items" 
 
     collection_id: Mapped[Optional[IDType]] = mapped_column(ForeignKey("collections.id"), index =True, nullable=True, default=None,)
-    collection: Mapped[Optional["CollectionModel"]] = relationship(
+    collection = relationship(
         "CollectionModel",
         back_populates="items",
-        init=False,
     )
     owner_id: Mapped[Optional[IDType]] = UUIDFKey(ForeignKey("users.id"), default=None, nullable=True, comment="Owner of the item")
     entity_id: Mapped[IDType] = mapped_column(default=None, nullable=True)
     entity_type_id: Mapped[Optional[IDType]] = mapped_column(ForeignKey("entity_types.id"), index=True, nullable=True, default=None,)
-    entity_type: Mapped[Optional["EntityTypeModel"]] = relationship(
+    entity_type = relationship(
         "EntityTypeModel",
         back_populates="items",
-        init=False,
     )
     position: Mapped[int] = mapped_column(default=None, nullable=True)
 
     __table_args__ = (sqlalchemy.Index("ix_collection_items_entity", "entity_type_id", "entity_id"),)
-
-
-   

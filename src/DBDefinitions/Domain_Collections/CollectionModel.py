@@ -31,14 +31,10 @@ class CollectionModel(BaseDBModel):
     owner_id: Mapped[Optional[IDType]] = UUIDFKey(ForeignKey("users.id"), default=None, nullable=True, comment="Owner of the collection")
     color: Mapped[str] = mapped_column(default=None, nullable=True)
     
-    items: Mapped[list["CollectionItemModel"]] = relationship(
+    items = relationship(
         "CollectionItemModel",
         order_by="CollectionItemModel.position",
         back_populates="collection",
         uselist=True,
-        init=True,
-        default_factory=list,
         cascade="save-update",
     )
-
-   

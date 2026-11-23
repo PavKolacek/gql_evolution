@@ -14,6 +14,9 @@ from src.DBDefinitions import (
     TagTypeModel,
     TagModel,
     TagEntityModel,
+    CollectionModel,
+    CollectionItemModel,
+    EntityTypeModel,
 )
 
 class LoaderMap(LoaderMapBase[BaseDBModel]):
@@ -26,6 +29,9 @@ class LoaderMap(LoaderMapBase[BaseDBModel]):
     TagTypeModel: IDLoader[src.DBDefinitions.TagTypeModel] = None
     TagModel: IDLoader[src.DBDefinitions.TagModel] = None
     TagEntityModel: IDLoader[src.DBDefinitions.TagEntityModel] = None
+    CollectionModel: IDLoader[src.DBDefinitions.CollectionModel] = None
+    CollectionItemModel: IDLoader[src.DBDefinitions.CollectionItemModel] = None
+    EntityTypeModel: IDLoader[src.DBDefinitions.EntityTypeModel] = None
 
     def __init__(self, session):
         super().__init__(session)
@@ -37,6 +43,9 @@ class LoaderMap(LoaderMapBase[BaseDBModel]):
         self.TagTypeModel = self.get(TagTypeModel)
         self.TagModel = self.get(TagModel)
         self.TagEntityModel = self.get(TagEntityModel)
+        self.CollectionModel = self.get(CollectionModel)
+        self.CollectionItemModel = self.get(CollectionItemModel)
+        self.EntityTypeModel = self.get(EntityTypeModel)
     
     def get_by_name(self, name: str):
         return getattr(self, name)

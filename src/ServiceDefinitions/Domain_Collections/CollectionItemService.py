@@ -1,5 +1,6 @@
 import uuid
-
+from sqlalchemy import select
+from sqlalchemy import select, update
 from uoishelpers.dataloaders.IDLoader import IDLoader
 
 from src.DBDefinitions import CollectionItemModel
@@ -22,26 +23,31 @@ class CollectionItemService(BaseService[IDLoader[CollectionItemModel]]):
     # ---------- čtení ----------
     @classmethod
     async def GetOrdered(cls, ctx, collection_id) -> list:
+        # Čteme přímo ze session, ne přes FKeyLoader: ten si výsledek pro dané
+        # collection_id pamatuje (cache) a po vložení/přesunu by vracel zastaralá data.
         loader = await cls.getLoader(ctx)
-        items = await loader.filter_by(collection_id=collection_id)
-        return sorted(items, key=_sort_key)
+        model = loader.getModel()
+        statement = (
+            select(model)
+            .where(model.collection_id == collection_id)
+            .execution_options(populate_existing=True)
+        )
+        rows = (await ctx.session.execute(statement)).scalars().all()
+        return sorted(rows, key=_sort_key)
 
     # ---------- nízkoúrovňový zápis pozice ----------
     @classmethod
     async def _set_position(cls, ctx, row, position: int):
-        """Změní jen position jedné položky přes loader (optimistic lock přes lastchange)."""
+        """Změní jen sloupec position jedné položky (ostatní sloupce zůstanou)."""
         if row.position == position:
             return row
         loader = await cls.getLoader(ctx)
         model = loader.getModel()
-        # VARIANTA A (po úspěšném spiku z kroku 0):
-        return await loader.update(
-            entity=model(id=row.id, lastchange=row.lastchange, position=position)
+        await ctx.session.execute(
+            update(model).where(model.id == row.id).values(position=position)
         )
-        # VARIANTA B (pokud spike ukáže přepisování ostatních sloupců na None):
-        #   row.position = position
-        #   await ctx.session.flush()
-        #   return row
+        row.position = position   # drží lokální objekt v souladu s databází
+        return row
 
     @classmethod
     async def _apply_order(cls, ctx, ordered: list):
@@ -78,7 +84,7 @@ class CollectionItemService(BaseService[IDLoader[CollectionItemModel]]):
         # --- zápis ---
         for row in items[target - 1:]:            # posun ostatních o +1
             await cls._set_position(ctx, row, row.position + 1 if row.position else target)
-        entity.user_id = user_id
+        entity.owner_id = user_id
         entity.position = target
         return await cls.Create(ctx, entity)
 
