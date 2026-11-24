@@ -87,3 +87,7 @@ python .CoderDefinitions/main.py
 ```bash
 uvicorn main:app --port 9999 --env-file environment.txt
 ```
+
+
+Spousteni venv: .\venv\Scripts\Activate.ps1
+Spousteni testu: python -m pytest tests -q -o addopts="" --tb=short --cov=src --cov-report=term-missing
