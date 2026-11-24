@@ -163,7 +163,7 @@ async def test_execute_service_method_maps_sqlalchemy_errors():
 
     result = await FakeService.ExecuteServiceMethod(operation(), Error=error)
 
-    assert result["msg"] == "Database operation failed"
+    assert result["msg"].startswith("Database error: db failed code(")
     assert result["code"] in (None, "unknown")
 
 

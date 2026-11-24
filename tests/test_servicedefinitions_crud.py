@@ -415,7 +415,10 @@ async def test_servicedefinitions_crud_copy_existing_entities(
             )
 
             if update_payload is not None:
-                update_entity = build_instance(model_cls, update_payload)
+                update_entity = build_instance(
+                model_cls,
+                    {**fresh_loaded_payload, **update_payload},
+                )
 
                 updated = await service_cls.Update(
                     ctx=service_context,
@@ -431,16 +434,9 @@ async def test_servicedefinitions_crud_copy_existing_entities(
 
                     assert getattr(updated, field_name) == expected_value
 
-            delete_entity = build_instance(
-                model_cls,
-                {
-                    pk_name: copied_id,
-                },
-            )
-
             deleted_result = await service_cls.Delete(
                 ctx=service_context,
-                entity=delete_entity,
+                entity=created,
             )
 
             assert deleted_result is None # lepe osetrit
@@ -458,16 +454,9 @@ async def test_servicedefinitions_crud_copy_existing_entities(
         finally:
             if created is not None and not deleted:
                 try:
-                    cleanup_entity = build_instance(
-                        model_cls,
-                        {
-                            pk_name: copied_id,
-                        },
-                    )
-
                     await service_cls.Delete(
                         ctx=service_context,
-                        entity=cleanup_entity,
+                        entity=created,
                     )
                 except Exception:
                     pass

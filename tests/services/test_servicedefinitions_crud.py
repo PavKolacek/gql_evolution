@@ -415,7 +415,7 @@ async def test_servicedefinitions_crud_copy_existing_entities(
             )
 
             if update_payload is not None:
-                update_entity = build_instance(model_cls, update_payload)
+                update_entity = build_instance(model_cls, {**fresh_loaded_payload, **update_payload})
 
                 updated = await service_cls.Update(
                     ctx=service_context,

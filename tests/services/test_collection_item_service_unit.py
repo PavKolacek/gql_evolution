@@ -43,6 +43,26 @@ async def test_move_item_reorders_and_writes_only_changed_rows(monkeypatch):
         return loader
     monkeypatch.setattr(CollectionItemService, "getLoader", classmethod(fake_get_loader))
 
+    async def fake_get_ordered(cls, ctx, collection_id):
+        return sorted(
+            [i for i in loader.items.values() if i.collection_id == collection_id],
+            key=lambda i: i.position,
+        )
+
+    async def fake_set_position(cls, ctx, row, position):
+        if row.position != position:
+            loader.updated.append((row.id, position))
+            row.position = position
+        return row
+
+    monkeypatch.setattr(
+        CollectionItemService, "GetOrdered", classmethod(fake_get_ordered)
+    )
+    monkeypatch.setattr(
+        CollectionItemService, "_set_position", classmethod(fake_set_position)
+    )
+
+
     class FakeCollectionService:
         @classmethod
         async def EnsureOwner(cls, ctx, collection_id):

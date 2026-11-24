@@ -27,6 +27,11 @@ class ServiceRegistry:
     def EventInvitationService(self) -> type['_EventInvitationService']:
         from src.ServiceDefinitions.Domain_Events.EventInvitationService import EventInvitationService
         return EventInvitationService
+        
+    @property
+    def EventService(self) -> type['_EventService']:
+        from src.ServiceDefinitions.Domain_Events.EventService import EventService
+        return EventService
 
     @property
     def EntityTypeService(self) -> type['_EntityTypeService']:
